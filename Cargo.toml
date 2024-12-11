@@ -1,0 +1,26 @@
+[package]
+authors = ["Nguyen Le Duy"]
+description = "Tetris on pico2"
+edition = "2021"
+license = "MIT OR Apache-2.0"
+name = "tetris"
+version = "0.1.0"
+
+[dependencies]
+cortex-m = "0.7.2"
+critical-section = {version = "1.0.0"}
+embedded-hal = "1.0.0"
+heapless = "0.8.0"
+panic-halt = "0.2.0"
+rp235x-hal = { git = "https://github.com/rp-rs/rp-hal/", version = "0.2.0", features = ["binary-info", "critical-section-impl", "rt", "defmt"]}
+rand = { version = "0.8", default-features = false }
+
+# Display
+embedded-graphics = "0.8"
+ssd1306 = "0.9"
+
+[target.'cfg( target_arch = "arm" )'.dependencies]
+embassy-executor = {version = "0.5", features = ["arch-cortex-m", "executor-thread"]}
+
+[target.'cfg( target_arch = "riscv32" )'.dependencies]
+embassy-executor = {version = "0.5", features = ["arch-riscv32", "executor-thread"]}
